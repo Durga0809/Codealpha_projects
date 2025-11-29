@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        background-color: black;
+        color: white;
+      }
+      h1 {
+        color: white;
+        text-align: center;
+        padding: 20px;
+      }
+      h2 {
+        padding-left: 50px;
+      }
+      p {
+        padding-left: 9px;
+      }
+      .img1 {
+        height: 200px;
+        width: 200px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .img1:hover {
+        transform: scale(1.08);
+        filter: brightness(1.1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 255);
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-basis: 20%;
+        margin: 5px;
+        flex-grow: 1;
+      }
+      .container div {
+        width: 200px;
+        color: white;
+        margin: 10px;
+        justify-content: space-around;
+        flex-basis: 20%;
+        margin: 5px;
+        flex-grow: 1;
+      }
+      #lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+      #lightboximg {
+        width: 60%;
+        border-radius: 10px;
+        max-width: 700px;
+      }
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+      }
+      .close:hover {
+        color: aquamarine;
+        transform: scale(1.1);
+      }
+      .back {
+        cursor: pointer;
+        border-radius: 15px;
+        padding: 30px;
+      }
+      #lightbox button {
+        color: black;
+        border-radius: 10px;
+        background-color: aquamarine;
+        cursor: pointer;
+      }
+      h1 {
+        text-align: center;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 50px;
+      }
+      .back:hover {
+        background-color: aqua;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cartoon</title>
+  </head>
+  <body>
+    <h1>Toon World</h1>
+    <button class="back"><a href="/index.html">Back</a></button>
+    <div>
+      <h1></h1>
+      <!--Flex Container-->
+      <div class="container">
+        <div>
+          <img
+            src="/cartoonimg/micky.jpeg"
+            class="img1"
+            onclick="openLightbox(0)"
+          />
+          <h2>Micky Mouse</h2>
+          <p>Lorem ipsum dolor sit amet</p>
+        </div>
+        <div>
+          <img
+            src="/cartoonimg/nobi.jpg"
+            class="img1"
+            onclick="openLightbox(1)"
+          />
+          <h2>Nobita</h2>
+          <p>Lorem ipsum dolor sit amet</p>
+        </div>
+        <div>
+          <img
+            src="/cartoonimg/panda.jpeg"
+            class="img1"
+            onclick="openLightbox(2)"
+          />
+          <h2>Panda</h2>
+          <p>Lorem ipsum dolor sit amet</p>
+        </div>
+        <div>
+          <img
+            src="/cartoonimg/Rabii.jpg"
+            class="img1"
+            onclick="openLightbox(3)"
+          />
+          <h2>Rabii</h2>
+          <p>Lorem ipsum dolor sit amet</p>
+        </div>
+        <div>
+          <img
+            src="/cartoonimg/shinchan.jpeg"
+            class="img1"
+            onclick="openLightbox(4)"
+          />
+          <h2>Shinchan</h2>
+          <p>Lorem ipsum dolor sit amet</p>
+        </div>
+        <div>
+          <img
+            src="/cartoonimg/kalia.jpg"
+            class="img1"
+            onclick="openLightbox(5)"
+          />
+          <h2>kalia</h2>
+          <p>Lorem ipsum dolor sit amet</p>
+        </div>
+        <div>
+          <img
+            src="/cartoonimg/motupatlu.webp"
+            class="img1"
+            onclick="openLightbox(6)"
+          />
+          <h2>motu patlu</h2>
+          <p>Lorem ipsum dolor sit amet</p>
+        </div>
+        <div>
+          <img
+            src="/cartoonimg/susuka.jpg"
+            class="img1"
+            onclick="openLightbox(7)"
+          />
+          <h2>Susuka</h2>
+          <p>Lorem ipsum dolor sit amet</p>
+        </div>
+      </div>
+    </div>
+    <div id="lightbox">
+      <span class="close">&times</span>
+      <img id="lightboximg" />
+      <button onclick="prev()"><-- Prev</button>
+      <button onclick="next()">Next--></button>
+    </div>
+    <script>
+      let images = document.querySelectorAll(".img1");
+      let index = 0;
+      function openLightbox(i) {
+        index = i;
+        document.getElementById("lightbox").style.display = "flex";
+        document.getElementById("lightboximg").src = images[index].src;
+      }
+      document.querySelector(".close").onclick = function () {
+        document.getElementById("lightbox").style.display = "none";
+      };
+      let animals = [
+        "/cartoonimg/micky.jpeg",
+        "/cartoonimg/nobi.jpg",
+        "/cartoonimg/panda.jpeg",
+        "/cartoonimg/Rabii.jpg",
+        "/cartoonimg/shinchan.jpeg",
+        "/cartoonimg/kalia.jpg",
+        "/cartoonimg/motupatlu.webp",
+        "/cartoonimg/susuka.jpg",
+      ];
+      let mainimage = document.getElementById("mainimage");
+      function show() {
+        mainimage.src = animals[index];
+      }
+      function next() {
+        if (index < animals.length - 1) {
+          index++;
+          document.getElementById("lightboximg").src = animals[index];
+        } else {
+          alert("Last image reached");
+        }
+      }
+      function prev() {
+        if (index > 0) {
+          index--;
+          document.getElementById("lightboximg").src = animals[index];
+        } else {
+          alert("First image reached");
+        }
+      }
+    </script>
+  </body>
+</html>
